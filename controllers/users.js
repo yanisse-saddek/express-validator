@@ -10,6 +10,27 @@ router.get('/', (req, res)=>{
              .exec()
              .then(data=>res.json(data))
 })
+
+router.get('/:username', (req, res)=>{
+    UserModel.find({Username:req.params.username})
+             .exec()
+             .then(data=>res.json(data))
+})
+router.get('/id/:id', (req, res)=>{
+    UserModel.find({_id:req.params.id})
+             .exec()
+             .then(data=>res.json(data))
+})
+
+router.get('/email/:email', (req, res)=>{
+    console.log(req.params.email)
+    UserModel.findOne({email:req.params.email})
+             .then(data=>{
+                 console.log(data)
+                 res.json(data)
+                })
+})
+
 router.post('/users',
          body('username')
             .exists()
